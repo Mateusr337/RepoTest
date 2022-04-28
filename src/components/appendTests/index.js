@@ -7,123 +7,225 @@ import Input from "../Input";
 import { useState } from "react";
 import handleChange from "../../utils/handleChangeInput";
 import Button from "../button";
+import errorsMessage from "../../utils/errorsMessage";
+import { IconContainer, InputContainer, Options, Text } from "./styles";
+import { BsArrowLeftCircle, BsArrowDownCircle } from "react-icons/bs";
 
 export default function AppendTests({ Form }) {
-  const auth = useAuth();
+	const { auth } = useAuth();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [testData, setTestData] = useState({
-    name: "",
-    pdfUrl: "",
-    category: "",
-    rec: "",
-    term: "",
-    teacher: "",
-    discipline: "",
-  });
+	const [isLoading, setIsLoading] = useState(false);
 
-  function handleChangeFiles(e) {
-    setTestData({ ...testData, [e.target.name]: e.target.files });
-  }
+	const [showDisciplines, setShowDisciplines] = useState(false);
+	const [disciplinesList, setDisciplinesList] = useState([]);
 
-  function sendTest(e) {
-    e.preventDefault();
-    const promise = api.insertTest(
-      { file: testData.pdfUrl[0], name: testData.name },
-      auth.auth
-    );
-    // toast.promise(promise, {
-    //   promise: "Loading",
-    //   success: "Success!",
-    //   error: "Failed! try again!",
-    // });
-    // promise
-    //   .then((response) => {
-    //     // setTestData({
-    //     //   name: "",
-    //     //   pdfUrl: "",
-    //     //   category: "",
-    //     //   rec: "",
-    //     //   term: "",
-    //     //   teacher: "",
-    //     //   discipline: "",
-    //     // });
-    //     setIsLoading(false);
-    //   })
-    //   .catch(() => setIsLoading(false));
-  }
+	const [showTeachers, setShowTeachers] = useState(false);
+	const [teachersList, setTeachersList] = useState([]);
 
-  return (
-    <Form onSubmit={(e) => sendTest(e)} enctype="multipart/form-data">
-      <Input
-        name="name"
-        placeholder="Name of test"
-        value={testData.name}
-        onChange={(e) => handleChange(e, testData, setTestData)}
-        disabled={isLoading}
-      />
+	const [showCategories, setShowCategories] = useState(false);
+	const [categoriesList, setCategoriesList] = useState([]);
 
-      <Input
-        name="pdfUrl"
-        placeholder="PDF URL (ex: https:// ...)"
-        onChange={(e) => handleChangeFiles(e)}
-        disabled={isLoading}
-        type={"file"}
-        required
-      />
+	const [data, setData] = useState({
+		name: "",
+		pdf: "",
+		category: "",
+		teacher: "",
+		discipline: "",
+	});
 
-      <Input
-        name="category"
-        placeholder="Category (ex: P1, P2 ...)"
-        value={testData.category}
-        onChange={(e) => handleChange(e, testData, setTestData)}
-        disabled={isLoading}
-      />
+	function handleChangeFiles(e) {
+		setData({ ...data, [e.target.name]: e.target.files });
+	}
 
-      <Input
-        name="rec"
-        placeholder="Is recuperation? ('yes' or 'no')"
-        value={testData.rec}
-        onChange={(e) => handleChange(e, testData, setTestData)}
-        disabled={isLoading}
-      />
+	function sendTest(e) {
+		e.preventDefault();
+		setIsLoading(true);
 
-      <Input
-        name="teacher"
-        placeholder="Teacher name"
-        value={testData.teacher}
-        onChange={(e) => handleChange(e, testData, setTestData)}
-        disabled={isLoading}
-      />
+		api.insertTests({ ...data, pdf: data.pdf[0] }, auth)
+			.then((response) => {
+				toast.success("Success!");
+				setData({
+					name: "",
+					pdf: "",
+					category: "",
+					teacher: "",
+					discipline: "",
+				});
+			})
+			.catch((error) => {
+				errorsMessage(error);
+			});
+		setIsLoading(false);
+	}
 
-      <Input
-        name="discipline"
-        placeholder="Discipline name"
-        value={testData.discipline}
-        onChange={(e) => handleChange(e, testData, setTestData)}
-        disabled={isLoading}
-      />
+	function getDisciplines() {
+		api.getDisciplines(auth).then((response) => {
+			setDisciplinesList(response.data);
+			setShowDisciplines(true);
+		});
+	}
 
-      <Button
-        background={"#252526"}
-        color={"#3f61d7"}
-        width={"150px"}
-        disabled={isLoading}
-        type={"submit"}
-      >
-        {isLoading ? (
-          <ThreeDots color="#FFFFFF" height={15} width={40} />
-        ) : (
-          "Add"
-        )}
-      </Button>
+	function getTeachers() {
+		api.getTeachers(auth).then((response) => {
+			setTeachersList(response.data);
+			setShowTeachers(true);
+		});
+	}
 
-      <ToastContainer
-        toastStyle={{ backgroundColor: "#252526", top: "100px" }}
-        limit={1}
-        dark={true}
-        position={"top-center"}
-      />
-    </Form>
-  );
+	function getCategories() {
+		api.getCategories(auth).then((response) => {
+			setCategoriesList(response.data);
+			setShowCategories(true);
+		});
+	}
+
+	function changeInputValue(inputName, value, setShow) {
+		setData({ ...data, [inputName]: value });
+		setShow(false);
+	}
+
+	return (
+		<Form onSubmit={(e) => sendTest(e)} enctype="multipart/form-data">
+			<Input
+				name="name"
+				placeholder="Name of test"
+				value={data.name}
+				onChange={(e) => handleChange(e, data, setData)}
+				disabled={isLoading}
+			/>
+
+			<Input
+				name="pdf"
+				placeholder="PDF URL (ex: https:// ...)"
+				onChange={(e) => handleChangeFiles(e)}
+				disabled={isLoading}
+				type={"file"}
+				required
+			/>
+
+			<InputContainer>
+				<Input
+					name="category"
+					placeholder="Category (ex:p5 rec, P1, P2 ...)"
+					value={data.category}
+					onChange={(e) => handleChange(e, data, setData)}
+					disabled={isLoading}
+				/>
+
+				<IconContainer>
+					{showCategories ? (
+						<BsArrowDownCircle onClick={() => setShowCategories(false)} />
+					) : (
+						<BsArrowLeftCircle onClick={getCategories} />
+					)}
+				</IconContainer>
+
+				{showCategories && (
+					<Options>
+						{categoriesList.map((category, i) => (
+							<Text
+								key={i}
+								onClick={() =>
+									changeInputValue(
+										"category",
+										category.name,
+										setShowCategories
+									)
+								}>
+								{category.name.toUpperCase()}
+							</Text>
+						))}
+					</Options>
+				)}
+			</InputContainer>
+
+			<InputContainer>
+				<Input
+					name="teacher"
+					placeholder="Teacher name"
+					value={data.teacher}
+					onChange={(e) => handleChange(e, data, setData)}
+					disabled={isLoading}
+				/>
+
+				<IconContainer>
+					{showTeachers ? (
+						<BsArrowDownCircle onClick={() => setShowTeachers(false)} />
+					) : (
+						<BsArrowLeftCircle onClick={getTeachers} />
+					)}
+				</IconContainer>
+
+				{showTeachers && (
+					<Options>
+						{teachersList.map((teacher, i) => (
+							<Text
+								key={i}
+								onClick={() =>
+									changeInputValue(
+										"teacher",
+										teacher.name,
+										setShowTeachers
+									)
+								}>
+								{teacher.name.toUpperCase()}
+							</Text>
+						))}
+					</Options>
+				)}
+			</InputContainer>
+
+			<InputContainer>
+				<Input
+					name="discipline"
+					placeholder="Discipline name"
+					value={data.discipline}
+					onChange={(e) => handleChange(e, data, setData)}
+					disabled={isLoading}
+				/>
+
+				<IconContainer>
+					{showDisciplines ? (
+						<BsArrowDownCircle onClick={() => setShowDisciplines(false)} />
+					) : (
+						<BsArrowLeftCircle onClick={getDisciplines} />
+					)}
+				</IconContainer>
+
+				{showDisciplines && (
+					<Options>
+						{disciplinesList.map((discipline, i) => (
+							<Text
+								key={i}
+								onClick={() =>
+									changeInputValue(
+										"discipline",
+										discipline.name,
+										setShowDisciplines
+									)
+								}>
+								{discipline.name.toUpperCase()}
+							</Text>
+						))}
+					</Options>
+				)}
+			</InputContainer>
+
+			<Button
+				background={"#252526"}
+				color={"#3f61d7"}
+				width={"150px"}
+				disabled={isLoading}
+				type={"submit"}>
+				{isLoading ? <ThreeDots color="#FFFFFF" height={15} width={40} /> : "Add"}
+			</Button>
+
+			<ToastContainer
+				toastStyle={{ backgroundColor: "#252526", top: "100px" }}
+				limit={1}
+				dark={true}
+				position={"top-center"}
+			/>
+		</Form>
+	);
 }

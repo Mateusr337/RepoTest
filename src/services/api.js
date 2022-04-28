@@ -53,6 +53,16 @@ export function getTeachers(token) {
 	return promise;
 }
 
+export function getCategories(token) {
+	const promise = api.get("/categories", config(token));
+	return promise;
+}
+
+export function getDisciplines(token) {
+	const promise = api.get("/disciplines", config(token));
+	return promise;
+}
+
 export function GithubCallback(code, access_token) {
 	const promise = api.get(`/github/callback?code=${code}&access_token=${access_token}`);
 	return promise;
@@ -90,5 +100,16 @@ export function insertTeacher(data, token) {
 
 export function insertCategory(data, token) {
 	const promise = api.post("/categories", data, config(token));
+	return promise;
+}
+
+export function insertTests(data, token) {
+	const formData = new FormData();
+
+	for (let key in data) {
+		formData.append(key, data[key]);
+	}
+
+	const promise = api.post("/tests", formData, config(token));
 	return promise;
 }

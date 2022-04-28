@@ -3,9 +3,7 @@ import Button from "../../components/button";
 import { Buttons, Container, Main, Form, Title } from "./style";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../../components/header";
-import AppendDisciplines from "../../components/appendDisciplines";
-import AppendTeachers from "../../components/appendTeacher";
-import AppendCategory from "../../components/appendCategory";
+import AppendTests from "../../components/appendTests";
 
 export default function HomePage() {
 	const [screen, setScreen] = useState("disciplines");
@@ -31,14 +29,8 @@ export default function HomePage() {
 			<Main>
 				{screen === "append" && (
 					<>
-						<Title>Add a discipline</Title>
-						<AppendDisciplines Form={Form} />
-
-						<Title>Add a Teachers</Title>
-						<AppendTeachers Form={Form} />
-
-						<Title>Add a Category</Title>
-						<AppendCategory Form={Form} />
+						<Title>Add a test</Title>
+						<AppendTests Form={Form} />
 					</>
 				)}
 			</Main>

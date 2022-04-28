@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignInPage from "./pages/signIn";
+import SignUpPage from "./pages/signUp";
+import "./styles/reset.css";
+import "./styles/style.css";
+import { AuthProvider } from "./contexts/AuthContext";
+import GithubPage from "./pages/githubPage";
 
-function App() {
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/home" element={<></>} />
+          <Route path="/github/callback" element={<GithubPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

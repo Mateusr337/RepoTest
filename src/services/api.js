@@ -28,23 +28,11 @@ export function validateAuth(data) {
 	return promise;
 }
 
-export function insertTest(data, token) {
-	const newData = new FormData();
-
-	for (let info in data) {
-		newData.append(`${info}`, data[info]);
-	}
-	console.log(newData);
-	const promise = api.post("/tests", newData, {
-		headers: {
-			"content-Type": "multipart/form-data",
-		},
-	});
-	return promise;
-}
-
-export function getTests(token) {
-	const promise = api.get("/tests", config(token));
+export function getTests(token, discipline, category) {
+	const promise = api.get(
+		`/tests?category=${category}&discipline=${discipline}`,
+		config(token)
+	);
 	return promise;
 }
 
@@ -58,8 +46,8 @@ export function getCategories(token) {
 	return promise;
 }
 
-export function getDisciplines(token) {
-	const promise = api.get("/disciplines", config(token));
+export function getDisciplines(token, term) {
+	const promise = api.get(`/disciplines?term=${term}`, config(token));
 	return promise;
 }
 
@@ -78,13 +66,17 @@ export function LoginWithGithub(email) {
 	return promise;
 }
 
-export function searchDisciplines(name, token) {
-	const promise = api.get(`/disciplines/${name}`, config(token));
+export function searchTeachers(name, token) {
+	const promise = api.get(`/teachers/${name}`, config(token));
 	return promise;
 }
 
-export function searchTeachers(name, token) {
-	const promise = api.get(`/teachers/${name}`, config(token));
+export function searchTests(token, discipline, teacher) {
+	console.log(discipline, teacher);
+	const promise = api.get(
+		`/tests/?search=yes&teacher=${teacher}&discipline=${discipline}`,
+		config(token)
+	);
 	return promise;
 }
 

@@ -8,10 +8,10 @@ import { useState } from "react";
 import handleChange from "../../utils/handleChangeInput";
 import Button from "../button";
 import errorsMessage from "../../utils/errorsMessage";
-import { IconContainer, InputContainer, Options, Text } from "./styles";
+import { Form, IconContainer, InputContainer, Options, Text, Title } from "./styles";
 import { BsArrowLeftCircle, BsArrowDownCircle } from "react-icons/bs";
 
-export default function AppendTests({ Form }) {
+export default function AppendTests() {
 	const { auth } = useAuth();
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -46,8 +46,8 @@ export default function AppendTests({ Form }) {
 				toast.success("Success!");
 				setData({
 					name: "",
-					pdf: "",
 					category: "",
+					pdf: "",
 					teacher: "",
 					discipline: "",
 				});
@@ -86,17 +86,20 @@ export default function AppendTests({ Form }) {
 
 	return (
 		<Form onSubmit={(e) => sendTest(e)} enctype="multipart/form-data">
+			<Title>Add a test</Title>
 			<Input
 				name="name"
-				placeholder="Name of test"
 				value={data.name}
+				placeholder="Name of test"
 				onChange={(e) => handleChange(e, data, setData)}
 				disabled={isLoading}
+				required
 			/>
 
 			<Input
 				name="pdf"
 				placeholder="PDF URL (ex: https:// ...)"
+				files={data.pdf}
 				onChange={(e) => handleChangeFiles(e)}
 				disabled={isLoading}
 				type={"file"}
@@ -105,6 +108,8 @@ export default function AppendTests({ Form }) {
 
 			<InputContainer>
 				<Input
+					autoComplete="off"
+					onClick={getCategories}
 					name="category"
 					placeholder="Category (ex:p5 rec, P1, P2 ...)"
 					value={data.category}
@@ -116,7 +121,7 @@ export default function AppendTests({ Form }) {
 					{showCategories ? (
 						<BsArrowDownCircle onClick={() => setShowCategories(false)} />
 					) : (
-						<BsArrowLeftCircle onClick={getCategories} />
+						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 
@@ -141,6 +146,8 @@ export default function AppendTests({ Form }) {
 
 			<InputContainer>
 				<Input
+					onClick={getTeachers}
+					autoComplete="off"
 					name="teacher"
 					placeholder="Teacher name"
 					value={data.teacher}
@@ -152,7 +159,7 @@ export default function AppendTests({ Form }) {
 					{showTeachers ? (
 						<BsArrowDownCircle onClick={() => setShowTeachers(false)} />
 					) : (
-						<BsArrowLeftCircle onClick={getTeachers} />
+						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 
@@ -177,6 +184,8 @@ export default function AppendTests({ Form }) {
 
 			<InputContainer>
 				<Input
+					autoComplete="off"
+					onClick={getDisciplines}
 					name="discipline"
 					placeholder="Discipline name"
 					value={data.discipline}
@@ -188,7 +197,7 @@ export default function AppendTests({ Form }) {
 					{showDisciplines ? (
 						<BsArrowDownCircle onClick={() => setShowDisciplines(false)} />
 					) : (
-						<BsArrowLeftCircle onClick={getDisciplines} />
+						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 

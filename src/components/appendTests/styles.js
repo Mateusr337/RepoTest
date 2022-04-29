@@ -10,7 +10,7 @@ export const InputContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-	height: 45px;
+	height: 55px;
 
 	align-items: center;
 	color: #363636;
@@ -42,4 +42,27 @@ export const Text = styled.span`
 		cursor: pointer;
 		background: lightgray;
 	}
+`;
+
+export const Form = styled.form`
+	width: 100%;
+
+	gap: 15px;
+
+	display: flex;
+	flex-direction: column;
+
+	button {
+		align-self: flex-end;
+	}
+`;
+
+export const Title = styled.div`
+	padding: 5px 20px;
+	color: #3f61d7;
+
+	font-family: "Poppins";
+	font-weight: 700;
+	font-size: 26px;
+	line-height: 24px;
 `;

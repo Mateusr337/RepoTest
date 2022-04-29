@@ -1,39 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../../components/button";
-import { Buttons, Container, Main, Form, Title } from "./style";
+import { Buttons, Container, Main } from "./style";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../../components/header";
 import AppendTests from "../../components/appendTests";
+import Disciplines from "../../components/disciplines";
 
 export default function HomePage() {
-	const [screen, setScreen] = useState("disciplines");
+	const [screen, setScreen] = useState(<Disciplines />);
 
 	return (
 		<Container>
 			<Header />
 
 			<Buttons>
-				<Button width={"150px"} action={() => setScreen("disciplines")}>
+				<Button width={"150px"} action={() => setScreen(<Disciplines />)}>
 					Disciplines
 				</Button>
 
-				<Button width={"150px"} action={() => setScreen("teachers")}>
+				<Button width={"150px"} action={() => setScreen("Teachers")}>
 					Teacher
 				</Button>
 
-				<Button width={"150px"} action={() => setScreen("append")}>
+				<Button width={"150px"} action={() => setScreen(<AppendTests />)}>
 					Append
 				</Button>
 			</Buttons>
 
-			<Main>
-				{screen === "append" && (
-					<>
-						<Title>Add a test</Title>
-						<AppendTests Form={Form} />
-					</>
-				)}
-			</Main>
+			<Main>{screen}</Main>
 		</Container>
 	);
 }

@@ -18,7 +18,8 @@ export default function Files({ discipline, category }) {
 		<Container>
 			{list.map((item, i) => {
 				let infoShow;
-				if (discipline) infoShow = item.teacherDiscipline.discipline.name;
+				if (discipline) infoShow = item.teacherDiscipline.teacher.name;
+				if (category) infoShow = item.teacherDiscipline.discipline.name;
 
 				return (
 					<Text key={i} href={item.pdfUrl}>

@@ -25,7 +25,6 @@ export default function InputSuggests({ inputText }) {
 		api.searchTests(auth, searchData.discipline, searchData.teacher)
 			.then((response) => {
 				setSuggests(response.data);
-				console.log(response.data);
 			})
 			.catch((err) => console.log(err.message));
 	}
@@ -43,10 +42,24 @@ export default function InputSuggests({ inputText }) {
 				<Suggests>
 					{suggests.map((suggest, i) => {
 						if (inputText === "discipline")
-							return <div key={i}>{suggest.name}</div>;
+							return (
+								<div key={i}>
+									{suggest.name} -{" "}
+									{suggest.teacherDiscipline.discipline.name} -{" "}
+									{suggest.teacherDiscipline.discipline.term}° -{" "}
+									{suggest.teacherDiscipline.teacher.name}
+								</div>
+							);
 
-						if (inputText === "teachers")
-							return <div key={i}>{suggest.name}</div>;
+						if (inputText === "teacher")
+							return (
+								<div key={i}>
+									{suggest.name} -{" "}
+									{suggest.teacherDiscipline.teacher.name} -{" "}
+									{suggest.category.name} -{" "}
+									{suggest.teacherDiscipline.discipline.name}
+								</div>
+							);
 					})}
 				</Suggests>
 			)}

@@ -28,9 +28,9 @@ export function validateAuth(data) {
 	return promise;
 }
 
-export function getTests(token, discipline, category) {
+export function getTests(token, discipline, category, teacher) {
 	const promise = api.get(
-		`/tests?category=${category}&discipline=${discipline}`,
+		`/tests?category=${category}&discipline=${discipline}&teacher=${teacher}`,
 		config(token)
 	);
 	return promise;

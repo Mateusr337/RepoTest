@@ -6,13 +6,21 @@ import * as api from "../../services/api";
 import { ThreeDots } from "react-loader-spinner";
 import Files from "../file";
 
-export default function Subtopics({ children, term, teacher }) {
+export default function Subtopics({ term, teacher }) {
 	const { auth } = useAuth();
 
 	const [list, setList] = useState([]);
 
 	useEffect(() => {
 		term && api.getDisciplines(auth, term).then((response) => setList(response.data));
+		teacher &&
+			api.getTests(auth, null, null, teacher).then((response) => {
+				const categoriesThisTeacher = response.data.map((test) => ({
+					...test.category,
+					discipline: test.teacherDiscipline.discipline,
+				}));
+				setList(categoriesThisTeacher);
+			});
 	}, []);
 
 	return (

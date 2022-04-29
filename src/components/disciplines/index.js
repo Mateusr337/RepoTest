@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Container, TermContainer, Topic } from "./style";
-import * as api from "../../services/api";
 import { BsArrowLeftCircleFill, BsArrowDownCircleFill } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
 import Subtopics from "../subtopic";

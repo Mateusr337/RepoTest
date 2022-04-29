@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "../../components/header";
 import AppendTests from "../../components/appendTests";
 import Disciplines from "../../components/disciplines";
+import Teachers from "../../components/Teachers";
 
 export default function HomePage() {
 	const [screen, setScreen] = useState(<Disciplines />);
@@ -18,7 +19,7 @@ export default function HomePage() {
 					Disciplines
 				</Button>
 
-				<Button width={"150px"} action={() => setScreen("Teachers")}>
+				<Button width={"150px"} action={() => setScreen(<Teachers />)}>
 					Teacher
 				</Button>
 

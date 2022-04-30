@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ThreeDots } from "react-loader-spinner";
 import useAuth from "../../hooks/useAuth";
 import Input from "../Input";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import handleChange from "../../utils/handleChangeInput";
 import Button from "../button";
 import errorsMessage from "../../utils/errorsMessage";
@@ -25,6 +25,8 @@ export default function AppendTests() {
 	const [showCategories, setShowCategories] = useState(false);
 	const [categoriesList, setCategoriesList] = useState([]);
 
+	const fileInput = useRef();
+
 	const [data, setData] = useState({
 		name: "",
 		pdf: "",
@@ -33,15 +35,11 @@ export default function AppendTests() {
 		discipline: "",
 	});
 
-	function handleChangeFiles(e) {
-		setData({ ...data, [e.target.name]: e.target.files });
-	}
-
 	function sendTest(e) {
 		e.preventDefault();
 		setIsLoading(true);
 
-		api.insertTests({ ...data, pdf: data.pdf[0] }, auth)
+		api.insertTests({ ...data, pdf: fileInput.current.files[0] }, auth)
 			.then((response) => {
 				toast.success("Success!");
 				setData({
@@ -59,7 +57,7 @@ export default function AppendTests() {
 	}
 
 	function getDisciplines() {
-		api.getDisciplines(auth).then((response) => {
+		api.getDisciplines(auth, "").then((response) => {
 			setDisciplinesList(response.data);
 			setShowDisciplines(true);
 		});
@@ -100,9 +98,9 @@ export default function AppendTests() {
 				name="pdf"
 				placeholder="PDF URL (ex: https:// ...)"
 				files={data.pdf}
-				onChange={(e) => handleChangeFiles(e)}
 				disabled={isLoading}
 				type={"file"}
+				ref={fileInput}
 				required
 			/>
 

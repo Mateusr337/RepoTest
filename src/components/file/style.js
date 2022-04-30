@@ -5,10 +5,18 @@ export const Container = styled.div`
 	flex-direction: column;
 `;
 
-export const Text = styled.div`
+export const Text = styled.a`
 	padding: 0px 30px;
+
 	font-family: "Poppins";
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 24px;
+	text-decoration: none;
+	color: #000000;
+
+	&:hover {
+		cursor: pointer;
+		color: #252526;
+	}
 `;

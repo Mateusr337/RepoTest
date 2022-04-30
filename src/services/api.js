@@ -72,7 +72,6 @@ export function searchTeachers(name, token) {
 }
 
 export function searchTests(token, discipline, teacher) {
-	console.log(discipline, teacher);
 	const promise = api.get(
 		`/tests/?search=yes&teacher=${teacher}&discipline=${discipline}`,
 		config(token)
@@ -92,6 +91,11 @@ export function insertTeacher(data, token) {
 
 export function insertCategory(data, token) {
 	const promise = api.post("/categories", data, config(token));
+	return promise;
+}
+
+export function putTestViews(views, id, token) {
+	const promise = api.put(`/tests/${id}`, { views }, config(token));
 	return promise;
 }
 

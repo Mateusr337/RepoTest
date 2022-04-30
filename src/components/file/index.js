@@ -14,6 +14,14 @@ export default function Files({ discipline, category }) {
 		});
 	}, []);
 
+	function putViews(id, currentView) {
+		const viewPut = parseInt(currentView) + 1;
+
+		api.putTestViews(viewPut, id, auth).then((response) => {
+			console.log(viewPut, "funcionou");
+		});
+	}
+
 	return (
 		<Container>
 			{list.map((item, i) => {
@@ -22,8 +30,13 @@ export default function Files({ discipline, category }) {
 				if (category) infoShow = item.teacherDiscipline.discipline.name;
 
 				return (
-					<Text key={i} href={item.pdfUrl}>
-						{item.name} - {`${infoShow}`} - {item.category.name}
+					<Text
+						key={i}
+						target="_blank"
+						href={item.pdfUrl}
+						onClick={() => putViews(item.id, item.views)}>
+						{item.name} ( {`${infoShow}`} / {item.category.name} / views:{" "}
+						{item.views} )
 					</Text>
 				);
 			})}

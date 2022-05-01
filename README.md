@@ -9,24 +9,6 @@ Where you could post pdf's of college tests with suggestive inputs (teacher, dis
 
 Back end in: https://github.com/Mateusr337/RepoTest_API
 
-</div>
-
-## :hammer: Features
-
-:ballot_box_with_check: `Sign Up` - Receives email and password.
-
-:ballot_box_with_check: `Login` - Receives email and password.
-
-:ballot_box_with_check: `Login with github` - Recive email and return token.
-
-:ballot_box_with_check: `tests` you can post,get and put tests. You can to search for tests by teachers or disciplines
-
-:ballot_box_with_check: `teachers` you can post and get teachers.
- 
-:ballot_box_with_check: `disciplines` you can post and get tests. And sarch for tests by teachers or disciplines
-
-
-
 ## :woman_technologist: Technologies
 
 <p align="center">
@@ -38,7 +20,6 @@ Back end in: https://github.com/Mateusr337/RepoTest_API
   <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=000000"/>
   <img src="https://img.shields.io/badge/github-000000?style=for-the-badge&logo=github&logoColor=ffffff"/>
 </p>
-<br>  
 
 ## :tada: How to run
 

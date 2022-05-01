@@ -13,6 +13,13 @@ export const Container = styled.div`
 	align-items: center;
 `;
 
+export const Text = styled.div`
+	font-family: "Poppins";
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 24px;
+`;
+
 export const Buttons = styled.div`
 	width: 100%;
 	height: 30px;

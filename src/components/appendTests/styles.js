@@ -17,7 +17,7 @@ export const IconContainer = styled.div`
 
 	display: flex;
 	position: absolute;
-	right: 5px;
+	right: 18px;
 	top: 0;
 
 	cursor: pointer;
@@ -54,6 +54,13 @@ export const Form = styled.form`
 
 	button {
 		align-self: flex-end;
+	}
+
+	input[type="file"] {
+		display: flex;
+		flex-direction: column;
+
+		color: #9f9fa2;
 	}
 `;
 

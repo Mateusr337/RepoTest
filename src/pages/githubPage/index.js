@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../hooks/useAuth";
 import { githubError } from "../signIn";
+import { Container, Text } from "./style";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function GithubPage() {
 	const navigate = useNavigate();
@@ -38,13 +40,9 @@ export default function GithubPage() {
 	}
 
 	return (
-		<>
-			<ToastContainer
-				toastStyle={{ backgroundColor: "#252526", top: "100px" }}
-				limit={1}
-				dark={true}
-				position={"top-center"}
-			/>
-		</>
+		<Container>
+			<ThreeDots color="#000000" size={80} />
+			<Text>Connecting .....</Text>
+		</Container>
 	);
 }

@@ -29,7 +29,6 @@ export default function AppendTests() {
 
 	const [data, setData] = useState({
 		name: "",
-		pdf: "",
 		category: "",
 		teacher: "",
 		discipline: "",
@@ -45,10 +44,10 @@ export default function AppendTests() {
 				setData({
 					name: "",
 					category: "",
-					pdf: "",
 					teacher: "",
 					discipline: "",
 				});
+				fileInput.current.value = null;
 			})
 			.catch((error) => {
 				errorsMessage(error);
@@ -95,9 +94,9 @@ export default function AppendTests() {
 			/>
 
 			<Input
+				id="file"
 				name="pdf"
 				placeholder="PDF URL (ex: https:// ...)"
-				files={data.pdf}
 				disabled={isLoading}
 				type={"file"}
 				ref={fileInput}

@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import useAuth from "../../hooks/useAuth";
 import * as api from "../../services/api";
 import Input from "../Input";
-import { InputContainer, Suggests } from "./style";
+import { InputContainer, Suggest, Suggests } from "./style";
 
 export default function InputSuggests({ inputText }) {
 	const [suggests, setSuggests] = useState([]);
@@ -29,6 +29,10 @@ export default function InputSuggests({ inputText }) {
 			.catch((err) => console.log(err.message));
 	}
 
+	function updateViews(id) {
+		api.putTestViews(id);
+	}
+
 	return (
 		<InputContainer>
 			<Input
@@ -41,25 +45,19 @@ export default function InputSuggests({ inputText }) {
 			{suggests.length !== 0 && (
 				<Suggests>
 					{suggests.map((suggest, i) => {
-						if (inputText === "discipline")
-							return (
-								<div key={i}>
-									{suggest.name} -{" "}
-									{suggest.teacherDiscipline.discipline.name} -{" "}
-									{suggest.teacherDiscipline.discipline.term}° -{" "}
-									{suggest.teacherDiscipline.teacher.name}
-								</div>
-							);
-
-						if (inputText === "teacher")
-							return (
-								<div key={i}>
-									{suggest.name} -{" "}
-									{suggest.teacherDiscipline.teacher.name} -{" "}
-									{suggest.category.name} -{" "}
-									{suggest.teacherDiscipline.discipline.name}
-								</div>
-							);
+						return (
+							<Suggest
+								href={suggest.pdfUrl}
+								target="_blank"
+								key={i}
+								onClick={() => updateViews(suggest.id)}>
+								{suggest.name} -{" "}
+								{suggest.teacherDiscipline.discipline.name} -{" "}
+								{suggest.teacherDiscipline.discipline.term}° -{" "}
+								{suggest.teacherDiscipline.teacher.name} -{" "}
+								{suggest.category.name}
+							</Suggest>
+						);
 					})}
 				</Suggests>
 			)}

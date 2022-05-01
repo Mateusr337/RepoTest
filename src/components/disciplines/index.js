@@ -35,6 +35,7 @@ export default function Disciplines() {
 					<TermContainer key={term}>
 						<Topic onClick={() => changeActiveTerm(term)}>
 							<span>{term}° term</span>
+
 							{active ? (
 								<BsArrowDownCircleFill />
 							) : (

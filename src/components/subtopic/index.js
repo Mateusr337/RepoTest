@@ -12,13 +12,20 @@ export default function Subtopics({ term, teacher }) {
 	const [list, setList] = useState([]);
 
 	useEffect(() => {
-		term && api.getDisciplines(auth, term).then((response) => setList(response.data));
+		term &&
+			api.getDisciplines(auth, term).then((response) => {
+				setList(response.data.map((item) => item.name));
+			});
+
 		teacher &&
 			api.getTests(auth, null, null, teacher).then((response) => {
-				const categoriesThisTeacher = response.data.map((test) => ({
-					...test.category,
-					discipline: test.teacherDiscipline.discipline,
-				}));
+				const categoriesThisTeacher = [];
+
+				response.data.map((test) => {
+					if (!categoriesThisTeacher.includes(test.category.name))
+						categoriesThisTeacher.push(test.category.name);
+				});
+
 				setList(categoriesThisTeacher);
 			});
 	}, []);
@@ -36,11 +43,11 @@ export default function Subtopics({ term, teacher }) {
 					<div key={i}>
 						<Subtopic>
 							<BsArrowReturnRight />
-							<span>{item.name}</span>
+							<span>{item}</span>
 						</Subtopic>
 
-						{term && <Files discipline={item.name} />}
-						{teacher && <Files category={item.name} />}
+						{term && <Files discipline={item} />}
+						{teacher && <Files category={item} />}
 					</div>
 				))}
 		</Container>

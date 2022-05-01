@@ -22,7 +22,7 @@ Back end in: https://github.com/Mateusr337/RepoTest_API
 :ballot_box_with_check: `tests` you can post,get and put tests. You can to search for tests by teachers or disciplines
 
 :ballot_box_with_check: `teachers` you can post and get teachers.
-
+ 
 :ballot_box_with_check: `disciplines` you can post and get tests. And sarch for tests by teachers or disciplines
 
 
@@ -30,15 +30,13 @@ Back end in: https://github.com/Mateusr337/RepoTest_API
 ## :woman_technologist: Technologies
 
 <p align="center">
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
-<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
-<img src="https://img.shields.io/badge/jest-20232A?style=for-the-badge&logo=jest&logoColor=C21325"/>
-
-  
-
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
+  <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=000000"/>
+  <img src="https://img.shields.io/badge/github-000000?style=for-the-badge&logo=github&logoColor=ffffff"/>
 </p>
 <br>  
 
@@ -55,17 +53,10 @@ $ git clone https://github.com/Mateusr337/RepoTest_API.git
 $ cd Linkr
 
 # install the dependencies
-$ npm or yarn install
+$ npm i
 
 # to run in dev
 $ npm start
 
-# The server will start on port:5000 - go to <http://localhost:5000>
-```
-
-## :sparkles: Authors
-
-| [<img src="https://avatars.githubusercontent.com/starunz" width=115><br><sub>Bruna Souza</sub>](https://github.com/starunz) |  [<img src="https://avatars.githubusercontent.com/luis-garbelotti" width=115><br><sub>Luis Garbelotti</sub>](https://github.com/luis-garbelotti) |  [<img src="https://avatars.githubusercontent.com/lusntgo" width=115><br><sub>Luiza Santiago</sub></sub>](https://github.com/lusntgo) |  [<img src="https://avatars.githubusercontent.com/Mateusr337" width=115><br><sub>Mateus Cruz Rossetto</sub>](https://github.com/Mateusr337) |  [<img src="https://avatars.githubusercontent.com/thalesor" width=115><br><sub>Thales de Oliveira Ruano</sub>](https://github.com/thalesor) 
-| :---: | :---: | :---: | :---: | :---: |
 
 

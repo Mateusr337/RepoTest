@@ -36,6 +36,7 @@ export const Suggests = styled.div`
 export const Suggest = styled.a`
 	text-decoration: none;
 	color: #000000;
+	font-size: 14px;
 
 	&:hover {
 		cursor: pointer;

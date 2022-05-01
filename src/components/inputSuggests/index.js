@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
 import useAuth from "../../hooks/useAuth";
 import * as api from "../../services/api";
 import Input from "../Input";
@@ -7,17 +6,16 @@ import { InputContainer, Suggest, Suggests } from "./style";
 
 export default function InputSuggests({ inputText }) {
 	const [suggests, setSuggests] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [text, setText] = useState("");
 
 	const { auth } = useAuth();
 
 	function search(e) {
-		if (e.target.value === "") return setSuggests([]);
-
 		const searchData = {
 			discipline: "",
 			teacher: "",
 		};
+		setText(e.target.value);
 
 		if (inputText === "discipline") searchData.discipline = e.target.value;
 		if (inputText === "teacher") searchData.teacher = e.target.value;
@@ -29,8 +27,11 @@ export default function InputSuggests({ inputText }) {
 			.catch((err) => console.log(err.message));
 	}
 
-	function updateViews(id) {
-		api.putTestViews(id);
+	function updateViews(id, views) {
+		const newViews = parseInt(views) + 1;
+		api.putTestViews(newViews, id, auth);
+		setText("");
+		setSuggests([]);
 	}
 
 	return (
@@ -39,7 +40,7 @@ export default function InputSuggests({ inputText }) {
 				placeholder={`Search by ${inputText}`}
 				width={"400px"}
 				onChange={(e) => search(e)}
-				disabled={isLoading}
+				value={text}
 			/>
 
 			{suggests.length !== 0 && (
@@ -50,12 +51,12 @@ export default function InputSuggests({ inputText }) {
 								href={suggest.pdfUrl}
 								target="_blank"
 								key={i}
-								onClick={() => updateViews(suggest.id)}>
+								onClick={(e) => updateViews(suggest.id, suggest.views)}>
 								{suggest.name} -{" "}
 								{suggest.teacherDiscipline.discipline.name} -{" "}
-								{suggest.teacherDiscipline.discipline.term}° -{" "}
 								{suggest.teacherDiscipline.teacher.name} -{" "}
-								{suggest.category.name}
+								{suggest.teacherDiscipline.discipline.term}° -{" "}
+								{suggest.views} views
 							</Suggest>
 						);
 					})}

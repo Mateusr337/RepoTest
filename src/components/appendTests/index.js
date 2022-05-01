@@ -134,7 +134,7 @@ export default function AppendTests() {
 										setShowCategories
 									)
 								}>
-								{category.name.toUpperCase()}
+								{category.name.toLowerCase()}
 							</Text>
 						))}
 					</Options>
@@ -172,7 +172,7 @@ export default function AppendTests() {
 										setShowTeachers
 									)
 								}>
-								{teacher.name.toUpperCase()}
+								{teacher.name.toLowerCase()}
 							</Text>
 						))}
 					</Options>
@@ -210,7 +210,7 @@ export default function AppendTests() {
 										setShowDisciplines
 									)
 								}>
-								{discipline.name.toUpperCase()}
+								{discipline.name.toLowerCase()}
 							</Text>
 						))}
 					</Options>

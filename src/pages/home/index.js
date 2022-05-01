@@ -6,17 +6,22 @@ import Header from "../../components/header";
 import AppendTests from "../../components/appendTests";
 import Disciplines from "../../components/disciplines";
 import Teachers from "../../components/Teachers";
+import { RiStarSmileFill } from "react-icons/ri";
+import { AiTwotoneLike } from "react-icons/ai";
+import { SiHellofresh } from "react-icons/si";
 
 export default function HomePage() {
 	const inicialScreen = (
 		<Text>
-			<br /> <br />
-			Hello, thank you for accessing our app,
+			<SiHellofresh id="helloIcon" size={60} />
+			Hello! thank you for accessing our app, <AiTwotoneLike />
 			<br /> <br />
 			Start to improve your knowledge by accessing the "disciplines" or "teachers"
 			sessions, or contribute with a test in "insert",
 			<br /> <br />
-			good studies!
+			good studies! <RiStarSmileFill />
+			<br />
+			<div> - Mateus Rossetto</div>
 		</Text>
 	);
 

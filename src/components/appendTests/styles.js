@@ -25,7 +25,7 @@ export const IconContainer = styled.div`
 
 export const Options = styled.div`
 	padding: 5px 0px;
-	background: #ffffff;
+	background: lightgrey;
 	border-radius: 5px;
 
 	display: flex;
@@ -60,7 +60,7 @@ export const Form = styled.form`
 		display: flex;
 		flex-direction: column;
 
-		color: #9f9fa2;
+		color: #363636;
 	}
 `;
 

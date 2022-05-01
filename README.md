@@ -25,19 +25,16 @@ Back end in: https://github.com/Mateusr337/RepoTest_API
 
 ```bash
 # Clone this repo
-$ git clone https://github.com/starunz/Linkr.git
+$ git clone https://github.com/Mateusr337/RepoTest.git
 
 # Clone the back-end repository and follow the instructions to run
 $ git clone https://github.com/Mateusr337/RepoTest_API.git
-
-# #change to project directory
-$ cd Linkr
 
 # install the dependencies
 $ npm i
 
 # to run in dev
-$ npm start
+$ npm src/ts-node
 
 
 

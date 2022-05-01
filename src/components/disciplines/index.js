@@ -33,7 +33,10 @@ export default function Disciplines() {
 				{" "}
 				{terms.map(({ term, active }) => (
 					<TermContainer key={term}>
-						<Topic onClick={() => changeActiveTerm(term)}>
+						<Topic
+							onClick={() =>
+								active ? changeActiveTerm() : changeActiveTerm(term)
+							}>
 							<span>{term}° term</span>
 
 							{active ? (

@@ -24,12 +24,15 @@ export const IconContainer = styled.div`
 `;
 
 export const Options = styled.div`
+	max-height: 150px;
+
 	padding: 5px 0px;
 	background: lightgrey;
 	border-radius: 5px;
 
 	display: flex;
 	flex-direction: column;
+	overflow-y: scroll;
 `;
 
 export const Text = styled.span`

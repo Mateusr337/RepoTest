@@ -15,14 +15,9 @@ export default function AppendTests() {
 	const { auth } = useAuth();
 
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [showDisciplines, setShowDisciplines] = useState(false);
+	const [showOptions, setShowOptions] = useState(null);
 	const [disciplinesList, setDisciplinesList] = useState([]);
-
-	const [showTeachers, setShowTeachers] = useState(false);
 	const [teachersList, setTeachersList] = useState([]);
-
-	const [showCategories, setShowCategories] = useState(false);
 	const [categoriesList, setCategoriesList] = useState([]);
 
 	const fileInput = useRef();
@@ -55,30 +50,33 @@ export default function AppendTests() {
 		setIsLoading(false);
 	}
 
+	function getData(type) {
+		if (type === "disciplines") getDisciplines();
+		if (type === "teachers") getTeachers();
+		if (type === "categories") getCategories();
+
+		setShowOptions(type);
+	}
+
 	function getDisciplines() {
 		api.getDisciplines(auth, "").then((response) => {
 			setDisciplinesList(response.data);
-			setShowDisciplines(true);
 		});
 	}
-
 	function getTeachers() {
 		api.getTeachers(auth).then((response) => {
 			setTeachersList(response.data);
-			setShowTeachers(true);
 		});
 	}
-
 	function getCategories() {
 		api.getCategories(auth).then((response) => {
 			setCategoriesList(response.data);
-			setShowCategories(true);
 		});
 	}
 
-	function changeInputValue(inputName, value, setShow) {
+	function changeInputValue(inputName, value) {
 		setData({ ...data, [inputName]: value });
-		setShow(false);
+		setShowOptions(null);
 	}
 
 	return (
@@ -106,7 +104,7 @@ export default function AppendTests() {
 			<InputContainer>
 				<Input
 					autoComplete="off"
-					onClick={getCategories}
+					onClick={() => getData("categories")}
 					name="category"
 					placeholder="Category (ex:p5 rec, P1, P2 ...)"
 					value={data.category}
@@ -115,24 +113,20 @@ export default function AppendTests() {
 				/>
 
 				<IconContainer>
-					{showCategories ? (
-						<BsArrowDownCircle onClick={() => setShowCategories(false)} />
+					{showOptions === "categories" ? (
+						<BsArrowDownCircle onClick={() => setShowOptions(null)} />
 					) : (
 						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 
-				{showCategories && (
+				{showOptions === "categories" && (
 					<Options>
 						{categoriesList.map((category, i) => (
 							<Text
 								key={i}
 								onClick={() =>
-									changeInputValue(
-										"category",
-										category.name,
-										setShowCategories
-									)
+									changeInputValue("category", category.name)
 								}>
 								{category.name.toLowerCase()}
 							</Text>
@@ -143,7 +137,7 @@ export default function AppendTests() {
 
 			<InputContainer>
 				<Input
-					onClick={getTeachers}
+					onClick={() => getData("teachers")}
 					autoComplete="off"
 					name="teacher"
 					placeholder="Teacher name"
@@ -153,25 +147,19 @@ export default function AppendTests() {
 				/>
 
 				<IconContainer>
-					{showTeachers ? (
-						<BsArrowDownCircle onClick={() => setShowTeachers(false)} />
+					{showOptions === "teachers" ? (
+						<BsArrowDownCircle onClick={() => setShowOptions(null)} />
 					) : (
 						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 
-				{showTeachers && (
+				{showOptions === "teachers" && (
 					<Options>
 						{teachersList.map((teacher, i) => (
 							<Text
 								key={i}
-								onClick={() =>
-									changeInputValue(
-										"teacher",
-										teacher.name,
-										setShowTeachers
-									)
-								}>
+								onClick={() => changeInputValue("teacher", teacher.name)}>
 								{teacher.name.toLowerCase()}
 							</Text>
 						))}
@@ -182,7 +170,7 @@ export default function AppendTests() {
 			<InputContainer>
 				<Input
 					autoComplete="off"
-					onClick={getDisciplines}
+					onClick={() => getData("disciplines")}
 					name="discipline"
 					placeholder="Discipline name"
 					value={data.discipline}
@@ -191,24 +179,20 @@ export default function AppendTests() {
 				/>
 
 				<IconContainer>
-					{showDisciplines ? (
-						<BsArrowDownCircle onClick={() => setShowDisciplines(false)} />
+					{showOptions === "disciplines" ? (
+						<BsArrowDownCircle onClick={() => setShowOptions(null)} />
 					) : (
 						<BsArrowLeftCircle />
 					)}
 				</IconContainer>
 
-				{showDisciplines && (
+				{showOptions === "disciplines" && (
 					<Options>
 						{disciplinesList.map((discipline, i) => (
 							<Text
 								key={i}
 								onClick={() =>
-									changeInputValue(
-										"discipline",
-										discipline.name,
-										setShowDisciplines
-									)
+									changeInputValue("discipline", discipline.name)
 								}>
 								{discipline.name.toLowerCase()}
 							</Text>

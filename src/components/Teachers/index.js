@@ -34,7 +34,10 @@ export default function Teachers() {
 			<Container>
 				{teachers.map(({ name, id, active }) => (
 					<TermContainer key={name}>
-						<Topic onClick={() => changeActiveTeacher(id)}>
+						<Topic
+							onClick={() =>
+								active ? changeActiveTeacher() : changeActiveTeacher(id)
+							}>
 							<span>{name}</span>
 							{active ? (
 								<BsArrowDownCircleFill />

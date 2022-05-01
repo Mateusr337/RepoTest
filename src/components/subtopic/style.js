@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 100%;
+	max-height: 300px;
 
 	border-radius: 10px;
 	background: #363636;
 
 	display: flex;
 	flex-direction: column;
+	overflow-y: scroll;
 `;
 
 export const Subtopic = styled.div`

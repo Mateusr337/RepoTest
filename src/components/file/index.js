@@ -7,18 +7,20 @@ export default function Files({ discipline, category }) {
 	const { auth } = useAuth();
 
 	const [list, setList] = useState([]);
+	const [render, setRender] = useState(0);
 
 	useEffect(() => {
 		api.getTests(auth, discipline, category).then((response) => {
+			response.data.sort((a, b) => (a.views < b.views ? 1 : -1));
 			setList(response.data);
 		});
-	}, []);
+	}, [render]);
 
-	function putViews(id, currentView) {
-		const viewPut = parseInt(currentView) + 1;
+	function putViews(item) {
+		const viewPut = parseInt(item.views) + 1;
 
-		api.putTestViews(viewPut, id, auth).then((response) => {
-			console.log(viewPut, "funcionou");
+		api.putTestViews(viewPut, item.id, auth).then((response) => {
+			setRender(render + 1);
 		});
 	}
 
@@ -34,7 +36,7 @@ export default function Files({ discipline, category }) {
 						key={i}
 						target="_blank"
 						href={item.pdfUrl}
-						onClick={() => putViews(item.id, item.views)}>
+						onClick={() => putViews(item)}>
 						{item.name} ( {`${infoShow}`} / {item.category.name} / views:{" "}
 						{item.views} )
 					</Text>

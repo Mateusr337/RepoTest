@@ -7,7 +7,7 @@
 RepoTest is a mobile-ready desktop application with password login or github.
 Where you could post pdf's of college tests with suggestive inputs (teacher, discipline, category), you can see the tests by professor or by term/discipline, as well as the 2 separate research inputs on their respective screens.
 
-Back end in: https://github.com/Mateusr337/RepoTest_API
+Back end in: https://github.com/Mateusr337/sing_me_a_song_API
 
 ## :woman_technologist: Technologies
 

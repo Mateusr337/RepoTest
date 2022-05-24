@@ -34,7 +34,7 @@ $ git clone https://github.com/Mateusr337/RepoTest_API.git
 $ npm i
 
 # to run in dev
-$ npm src/ts-node
+$ npm run start
 
 
 
